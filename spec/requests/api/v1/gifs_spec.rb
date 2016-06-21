@@ -16,8 +16,8 @@ describe "api/v1/gifs", type: :request do
       get url
 
       expect(response).to be_success
-      expect(json['gifs'].length).to eq 3
-      expect(json['gifs']).to all( be_serialized_with Api::V1::GifSerializer )
+      expect(json.length).to eq 3
+      expect(json).to all( be_serialized_with Api::V1::GifSerializer )
     end
   end
 
@@ -32,7 +32,7 @@ describe "api/v1/gifs", type: :request do
       get url
 
       expect(response).to be_success
-      expect(json['gif']).to be_serialized_with Api::V1::GifSerializer
+      expect(json).to be_serialized_with Api::V1::GifSerializer
     end
   end
 
@@ -49,7 +49,7 @@ describe "api/v1/gifs", type: :request do
 
       expect(response).to be_success
       expect(response).to have_http_status(:created)
-      expect(json['gif']).to be_serialized_with Api::V1::GifSerializer
+      expect(json).to be_serialized_with Api::V1::GifSerializer
     end
 
     it "error JSON" do

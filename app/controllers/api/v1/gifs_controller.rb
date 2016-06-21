@@ -2,9 +2,11 @@ class Api::V1::GifsController < Api::V1::BaseController
   before_action :set_gif, only: [:show, :update, :destroy]
 
   def index
-    gifs = Gif.recent.page(page)
+    @gifs = Gif.recent.page(page)
 
-    render json: gifs, each_serializer: Api::V1::GifSerializer
+    set_pagination_headers @gifs
+
+    render json: @gifs, each_serializer: Api::V1::GifSerializer
   end
 
   def show
@@ -44,5 +46,12 @@ class Api::V1::GifsController < Api::V1::BaseController
 
   def gif_params
     params.require(:gif).permit(:url, :tag_list)
+  end
+
+  def set_pagination_headers(collection)
+    response.headers['X-Total']       = collection.total_count
+    response.headers['X-Per-Page']    = collection.limit_value
+    response.headers['X-Page']        = collection.current_page
+    response.headers['X-Total-Pages'] = collection.total_pages
   end
 end
