@@ -47,11 +47,4 @@ class Api::V1::GifsController < Api::V1::BaseController
   def gif_params
     params.require(:gif).permit(:url, :tag_list)
   end
-
-  def set_pagination_headers(collection)
-    response.headers['X-Total']       = collection.total_count
-    response.headers['X-Per-Page']    = collection.limit_value
-    response.headers['X-Page']        = collection.current_page
-    response.headers['X-Total-Pages'] = collection.total_pages
-  end
 end
