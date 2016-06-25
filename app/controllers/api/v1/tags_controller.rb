@@ -2,7 +2,7 @@ class Api::V1::TagsController < Api::V1::BaseController
   before_action :set_tag, only: [:show]
 
   def index
-    @tags = ActsAsTaggableOn::Tag.order(:name).page(page)
+    @tags = ActsAsTaggableOn::Tag.order(:name).page(page).per(per)
 
     set_pagination_headers @tags
 

@@ -2,7 +2,7 @@ class Api::V1::GifsController < Api::V1::BaseController
   before_action :set_gif, only: [:show, :update, :destroy]
 
   def index
-    @gifs = Gif.recent.page(page)
+    @gifs = Gif.recent.page(page).per(per)
 
     set_pagination_headers @gifs
 

@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def page
     Integer(params[:page] || 1)
   end
+
+  def per
+    Integer(params[:per] || 25)
+  end
 end
