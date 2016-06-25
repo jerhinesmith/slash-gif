@@ -13,6 +13,12 @@ class Api::V1::GifsController < Api::V1::BaseController
     render json: @gif, serializer: Api::V1::GifSerializer
   end
 
+  def random
+    @gif = Gif.random(Array(params[:tag].to_s.split(/\s+/)))
+
+    render json: @gif, serializer: Api::V1::GifSerializer
+  end
+
   def create
     @gif = Gif.new(gif_params)
 

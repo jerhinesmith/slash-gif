@@ -10,6 +10,15 @@ class Gif < ActiveRecord::Base
   # Scopes
   scope :recent, -> { order(id: :desc) }
 
+  def self.random(tags = [])
+    if id = (tags.blank? ? self : self.tagged_with(tags, any: true)).pluck(:id).sample
+      find(id)
+    else
+      message = tags.blank? ? "No gifs found" : "Couldn't find Gif with tag(s) #{tags.join(', ')}"
+      raise ActiveRecord::RecordNotFound, message
+    end
+  end
+
   private
   def ensure_external_id
     self.external_id = generate_external_id if self.external_id.blank?

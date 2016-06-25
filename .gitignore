@@ -12,3 +12,6 @@
 !/log/.keep
 /tmp
 vendor/ruby
+
+# Ignore the env file for now
+.env
