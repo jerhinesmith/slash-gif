@@ -1,6 +1,11 @@
-<% @gifs.each do |gif| %>
-  <div class="gif">
-    <%= gif_tag(gif) %>
-    <%= gif.tags.map(&:name).join(', ') %>
+<% @tags.each do |tag| %>
+  <div class="gifs">
+    <h4><%= tag.name %></h4>
+    <% tag.taggings.collect(&:taggable).each do |gif| %>
+      <div class="gif">
+        <%= gif_tag(gif) %>
+        <%= gif.tags.map(&:name).join(', ') %>
+      </div>
+    <% end %>
   </div>
 <% end %>

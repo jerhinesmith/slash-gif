@@ -1,5 +1,5 @@
 class GifsController < ApplicationController
   def index
-    @gifs = Gif.recent.includes(:tags).page(page).per(per)
+    @tags = ActsAsTaggableOn::Tag.order(:name).includes(taggings: :taggable).page(page).per(per)
   end
 end
