@@ -19,6 +19,15 @@ class Gif < ActiveRecord::Base
     end
   end
 
+  def available?
+    begin
+      response = Net::HTTP.get_response(URI.parse(url))
+      response.code == '200'
+    rescue Errno::ECONNREFUSED => e
+      false
+    end
+  end
+
   private
   def ensure_external_id
     self.external_id = generate_external_id if self.external_id.blank?
