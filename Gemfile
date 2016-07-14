@@ -50,6 +50,8 @@ group :development do
   # Awesome print is awesome
   gem 'awesome_print'
 
+  gem 'foreman'
+
   # Pry it open!
   gem 'pry-rails'
 
