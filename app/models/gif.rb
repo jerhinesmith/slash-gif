@@ -25,6 +25,8 @@ class Gif < ActiveRecord::Base
       response.code == '200'
     rescue Errno::ECONNREFUSED => e
       false
+    rescue URI::InvalidURIError => e
+      false
     end
   end
 
