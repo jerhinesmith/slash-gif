@@ -21,9 +21,9 @@ class Api::V1::GifsController < Api::V1::BaseController
 
   def create
     @gif = Gif.where(url: gif_params['url']).first_or_create
-    @gif.tag_list.add(gif_params['tag_list'], parse: true)
 
     if @gif.persisted?
+      @gif.tag_list.add(gif_params['tag_list'], parse: true) && @gif.save
       render json: @gif, serializer: Api::V1::GifSerializer, status: :created
     else
       render json: { errors: @gif.errors }, success: false, status: :unprocessable_entity
