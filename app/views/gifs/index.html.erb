@@ -1,7 +1,7 @@
 <% @tags.each do |tag| %>
   <div class="gifs">
     <h4><%= tag.name %></h4>
-    <% tag.taggings.collect(&:taggable).each do |gif| %>
+    <% tag.taggings.collect(&:taggable).compact.each do |gif| %>
       <div class="gif">
         <%= gif_tag(gif) %>
         <%= gif.tags.map(&:name).join(', ') %>
